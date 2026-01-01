@@ -1,6 +1,4 @@
-
-
-export const CalendarPage = () => {
+export default function CalendarPage() {
     return (
         <div>Calendar Page</div>
     )

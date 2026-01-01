@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CalendarPage } from "./(dashboard)/calendar/page";
-import { WorkersPage } from "./(dashboard)/workers/page";
+import CalendarPage from "@/app/(dashboard)/calendar/page";
+import WorkersPage from "@/app/(dashboard)/workers/page";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
           <TabsTrigger value="workers">Workers</TabsTrigger>
         </TabsList>
         <TabsContent value="calendar">{<CalendarPage />}</TabsContent>
-        <TabsContent value="workers"><WorkersPage /></TabsContent>
+        <TabsContent value="workers">{<WorkersPage />}</TabsContent>
       </Tabs>
     </>
   );

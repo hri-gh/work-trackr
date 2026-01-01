@@ -1,6 +1,4 @@
-import React from 'react'
-
-export const WorkersPage = () => {
+export default function WorkersPage() {
     return (
         <div>WorkersPage</div>
     )
