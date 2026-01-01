@@ -14,11 +14,11 @@ datasource db {
 }
 
 model Worker {
-  id        String      @id @default(uuid())
-  name      String
-  mobile    String?
-  email     String?
-  createdAt DateTime    @default(now())
+  id          String      @id @default(uuid())
+  name        String
+  mobile      String?
+  email       String?
+  createdAt   DateTime    @default(now())
   workEntries WorkEntry[]
 }
 
@@ -26,9 +26,11 @@ model WorkEntry {
   id        String   @id @default(uuid())
   workerId  String
   date      DateTime
-  amount    Int       // daily amount (duplicated intentionally)
-  paid      Boolean   @default(false)
-  createdAt DateTime  @default(now())
+  riceKg    Float // rice quantity in KG
+  amount    Int // daily amount (duplicated intentionally)
+  note      String?
+  paid      Boolean  @default(false)
+  createdAt DateTime @default(now())
 
   worker Worker @relation(fields: [workerId], references: [id])
 
