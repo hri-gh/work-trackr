@@ -20,6 +20,8 @@ model Worker {
   email       String?
   createdAt   DateTime    @default(now())
   workEntries WorkEntry[]
+
+  @@map("workers")
 }
 
 model WorkEntry {
@@ -36,4 +38,5 @@ model WorkEntry {
 
   @@index([workerId])
   @@index([date])
+  @@map("work_entries")
 }
