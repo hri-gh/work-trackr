@@ -16,7 +16,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+import { useAddWorkerModalStore } from "@/store/add-worker-modal.store";
+
 export function Navbar() {
+  // const { openModal: openAddWorkerModal } = useAddWorkerModalStore();
+  const openAddWorkerModal = useAddWorkerModalStore((state) => state.openModal);
+
   return (
     <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
       <div className="flex h-16 items-center px-4 container mx-auto justify-between">
@@ -31,6 +36,7 @@ export function Navbar() {
           <Button
             variant="default"
             className="hidden sm:flex bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all"
+            onClick={openAddWorkerModal}
           >
             <PlusCircle className="mr-2 h-4 w-4" />
             Add Worker
@@ -45,7 +51,12 @@ export function Navbar() {
           </Button>
 
           {/* Mobile Icon Only Buttons */}
-          <Button variant="ghost" size="icon" className="sm:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={openAddWorkerModal}
+            className="sm:hidden"
+          >
             <PlusCircle className="h-5 w-5" />
           </Button>
           <Button variant="ghost" size="icon" className="sm:hidden">
