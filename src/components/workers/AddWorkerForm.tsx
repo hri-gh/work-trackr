@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useWorkers } from "@/hooks/use-workers";
 import {
     Field,
     FieldLabel,
@@ -22,6 +22,7 @@ interface AddWorkerFormProps {
 }
 
 export const AddWorkerForm = ({ onSuccess }: AddWorkerFormProps) => {
+    const { mutate } = useWorkers();
     const form = useForm<CreateWorkerInput>({
         resolver: zodResolver(CreateWorkerSchema),
         defaultValues: {
@@ -41,7 +42,7 @@ export const AddWorkerForm = ({ onSuccess }: AddWorkerFormProps) => {
     const onSubmit = async (data: CreateWorkerInput) => {
         try {
             await createWorker(data);
-
+            await mutate();
             toast.success("Worker added", {
                 description: "The worker was created successfully.",
             });

@@ -1,5 +1,9 @@
-export default function WorkersPage() {
+import { WorkersTable } from "@/components/workers/WorkersTable";
+
+
+export default async function WorkersPage() {
+
     return (
-        <div>WorkersPage</div>
+        <WorkersTable />
     )
 }
