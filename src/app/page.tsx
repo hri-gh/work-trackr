@@ -1,11 +1,12 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CalendarPage from "@/app/(dashboard)/calendar/page";
 import WorkersPage from "@/app/(dashboard)/workers/page";
+import { Calendar, Users } from "lucide-react";
 
 export default function Home() {
   return (
     <>
-      <Tabs defaultValue="calendar" className="w-[400px]">
+      <Tabs defaultValue="calendar">
         <TabsList>
           <TabsTrigger value="calendar">Calendar</TabsTrigger>
           <TabsTrigger value="workers">Workers</TabsTrigger>
