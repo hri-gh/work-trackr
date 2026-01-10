@@ -2,9 +2,15 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { CreateWorkerSchema } from "@/schemas";
 import { z } from "zod";
+import { auth } from "@/auth";
 
 // GET /api/workers - fetch all workers
-export async function GET() {
+// export async function GET() {
+export const GET = auth(async (req) => {
+  if (!req.auth) {
+    return NextResponse.json({ error: "Unauthorized" },{ status: 401 })
+  }
+
   try {
     const workers = await prisma.worker.findMany({
       orderBy: { createdAt: "desc" },
@@ -18,10 +24,16 @@ export async function GET() {
       { status: 500 },
     );
   }
-}
+})
 
-// POST /api/workers - create a new worker
-export async function POST(req: NextRequest) {
+
+// POST /api/workers - create } } a new worker
+// export async function POST(req: NextRequest) {
+export const POST = auth(async (req) => {
+  if (!req.auth) {
+    return NextResponse.json({ error: "Unauthorized" },{ status: 401 })
+  }
+
   try {
     const body = await req.json();
 
@@ -45,4 +57,4 @@ export async function POST(req: NextRequest) {
       { status: 500 },
     );
   }
-}
+})
