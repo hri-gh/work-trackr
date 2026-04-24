@@ -1,60 +1,33 @@
-import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
 import { CreateWorkerSchema } from "@/schemas";
-import { z } from "zod";
 import { auth } from "@/auth";
+import { getAuditContext } from "@/lib/audit/get-audit-context";
+import { ApiResponse } from "@/lib/api/response";
+import { getWorkers, createWorker } from "@/services/worker.service";
+import { Unauthorized } from "@/lib/errors";
+import { handleError } from "@/lib/errors/handle-error";
+import { zodValidate } from "@/utils/zod-validate";
 
 // GET /api/workers - fetch all workers
-// export async function GET() {
 export const GET = auth(async (req) => {
-  if (!req.auth) {
-    return NextResponse.json({ error: "Unauthorized" },{ status: 401 })
-  }
-
   try {
-    const workers = await prisma.worker.findMany({
-      orderBy: { createdAt: "desc" },
-    });
-
-    return NextResponse.json(workers);
+    if (!req.auth) throw Unauthorized();
+    const workers = await getWorkers();
+    return ApiResponse.success(workers);
   } catch (error) {
-    console.error("[WORKER_GET]", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
+    return handleError(error);
   }
-})
-
+});
 
 // POST /api/workers - create } } a new worker
-// export async function POST(req: NextRequest) {
 export const POST = auth(async (req) => {
-  if (!req.auth) {
-    return NextResponse.json({ error: "Unauthorized" },{ status: 401 })
-  }
-
   try {
+    if (!req.auth) throw Unauthorized();
     const body = await req.json();
-
-    const validated = CreateWorkerSchema.safeParse(body);
-    if (!validated.success) {
-      return NextResponse.json(
-        { error: z.treeifyError(validated.error) },
-        { status: 400 },
-      );
-    }
-
-    const worker = await prisma.worker.create({
-      data: validated.data,
-    });
-
-    return NextResponse.json(worker, { status: 201 });
+    const context = await getAuditContext(req);
+    const data = zodValidate(CreateWorkerSchema, body);
+    const worker = await createWorker(data, context);
+    return ApiResponse.created(worker);
   } catch (error) {
-    console.error("[WORKER_POST]", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 },
-    );
+    return handleError(error);
   }
-})
+});
