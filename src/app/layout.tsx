@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider, ModalProvider } from "@/providers";
+import { TabNavigation } from "@/components/navbar/TabNavigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1 container mx-auto px-4 py-6">
+              <TabNavigation />
               {children}
             </main>
           </div>
