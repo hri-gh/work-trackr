@@ -5,7 +5,7 @@ import { markEntriesPaid } from "@/services/work-entries.service";
 import { ApiResponse } from "@/lib/api/response";
 import { handleError } from "@/lib/errors/handle-error";
 import { auth } from "@/auth";
-import { Unauthorized, BadRequest } from "@/lib/errors";
+import { Unauthorized } from "@/lib/errors";
 
 export const PATCH = auth((async (req) => {
     try {
@@ -17,11 +17,9 @@ export const PATCH = auth((async (req) => {
 
         const data = zodValidate(MarkPaidSchema, body);
 
-        const paymentDate = new Date()
+        const paidAt = data.paymentDate ? new Date(data.paymentDate) : new Date();
 
-        if (!paymentDate) throw BadRequest("Payment date is not getting generated");
-
-        const result = await markEntriesPaid(data.entryIds, context, paymentDate);
+        const result = await markEntriesPaid(data.entryIds, context, paidAt);
 
         return ApiResponse.success(result);
     } catch (error) {
