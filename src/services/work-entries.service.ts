@@ -38,16 +38,19 @@ export const createWorkEntry = async (data: CreateWorkEntryInput, context: Audit
 }
 
 // mark entries as paid
-export const markEntriesPaid = async (entryIds: string[], context: AuditContext, paymentDate: Date) => {
+export const markEntriesPaid = async (entryIds: string[], context: AuditContext, paidAt: Date) => {
     const entries = await prisma.workEntry.findMany({
-        where: { id: { in: entryIds } },
+        where: {
+            id: { in: entryIds },
+            paid:false,  // only unpaid entries should be marked as paid, if some of the entries are already marked as paid, we can ignore them and mark the rest as paid
+        },
     });
 
     await prisma.workEntry.updateMany({
         where: { id: { in: entryIds } },
         data: {
             paid: true,
-            paymentDate: paymentDate
+            paidAt
         },
     });
 
@@ -69,8 +72,8 @@ export const markEntriesPaid = async (entryIds: string[], context: AuditContext,
                 action: AuditAction.MARK_PAID,
                 entity: AuditEntity.WORK_ENTRY,
                 entityId: entry.id,
-                oldValue: entry,
-                newValue: { ...entry, paid: true },
+                oldValue: {date:entry.date, paid:entry.paid, paidAt: entry.paidAt},
+                newValue: {date: entry.date, paid: true,  paidAt },
                 ...context,
             })
         )
