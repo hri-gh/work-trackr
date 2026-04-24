@@ -4,8 +4,8 @@ A workforce tracking and payment management system built to simplify manual work
 
 This application focuses on structured business logic, worker management, attendance tracking, and payment summaries.
 
-🔗 **Live Application:** [🔗](https://your-live-link.com)  
-🚀 **Deployed on:** Vercel 
+🔗 **Live Application:** [🔗](https://wrk-trackr.vercel.app/)
+🚀 **Deployed on:** Vercel
 
 ---
 
