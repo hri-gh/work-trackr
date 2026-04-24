@@ -1,11 +1,11 @@
 import StatCard from "@/components/shared/StatCard";
-import { Users, Calendar, IndianRupee } from "lucide-react";
+import { Calendar, IndianRupee } from "lucide-react";
 
 
 interface WorkerStatsProps {
     totalDays: number;
     totalAmount: number;
-    totalRice: number;
+    totalGrain: number;
     paidDays: number;
     unpaidDays: number;
     paidAmount: number;
@@ -25,7 +25,7 @@ export default function WorkerStats({ stats }: { stats: WorkerStatsProps }) {
                 className="border-l-4 border-l-indigo-500"
                 icon={<IndianRupee className="h-4 w-4 text-indigo-500" />}
             />
-            <StatCard title="Total Grain (Kg)" value={stats.totalRice}
+            <StatCard title="Total Grain (Kg)" value={stats.totalGrain}
                 className="border-l-4 border-l-green-300"
                 icon={<IndianRupee className="h-4 w-4 text-indigo-500" />}
             />
