@@ -14,8 +14,9 @@ import { Button } from "@/components/ui/button";
 import { CreateWorkerSchema } from "@/schemas/worker.schema";
 import type { CreateWorkerInput } from "@/schemas/worker.schema";
 
-import { createWorker } from "@/lib/api/workers";
+import { createWorker } from "@/lib/api-client/workers";
 import { toast } from "sonner";
+import { Spinner } from "../ui/spinner";
 
 interface AddWorkerFormProps {
     onSuccess?: () => void;
@@ -94,6 +95,7 @@ export const AddWorkerForm = ({ onSuccess }: AddWorkerFormProps) => {
                     id="email"
                     placeholder="john@example.com"
                     {...register("email")}
+                    required={false}
                 />
                 {errors.email && (
                     <FieldError>{errors.email.message}</FieldError>
@@ -101,7 +103,7 @@ export const AddWorkerForm = ({ onSuccess }: AddWorkerFormProps) => {
             </Field>
 
             <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? "Adding..." : "Add Worker"}
+                {isSubmitting ? <Spinner /> : "Add Worker"}
             </Button>
         </form>
     );
