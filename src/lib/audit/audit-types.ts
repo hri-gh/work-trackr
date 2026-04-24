@@ -1,0 +1,15 @@
+export enum AuditAction {
+    CREATE_WORKER = "CREATE_WORKER",
+    DELETE_WORKER = "DELETE_WORKER",
+    UPDATE_WORKER = "UPDATE_WORKER",
+
+    CREATE_WORK_ENTRY = "CREATE_WORK_ENTRY",
+    UPDATE_WORK_ENTRY = "UPDATE_WORK_ENTRY",
+    DELETE_WORK_ENTRY = "DELETE_WORK_ENTRY",
+    MARK_PAID = "MARK_PAID",
+}
+
+export enum AuditEntity {
+    WORKER = "Worker",
+    WORK_ENTRY = "WorkEntry",
+}
