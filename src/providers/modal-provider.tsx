@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AddWorkerModal } from "@/components/workers/AddWorkerModal";
+import { WorkEntryModal } from "@/components/work-entries/WorkEntryModal";
 
 export const ModalProvider = () => {
   const [mounted, setMounted] = useState(false);
@@ -12,8 +13,9 @@ export const ModalProvider = () => {
 
   return (
     <>
-      <AddWorkerModal />
       {/* Future modals */}
+      <AddWorkerModal />
+      <WorkEntryModal />
     </>
   );
 };
