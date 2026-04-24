@@ -17,7 +17,7 @@ export default auth((req) => {
     // Optional but recommended:
 
     // After login, user returns to the original page
-    // signInUrl.searchParams.set("callbackUrl", req.nextUrl.href)
+    signInUrl.searchParams.set("callbackUrl", req.nextUrl.href)
 
     // Or, redirect to the home page or specific route after login
     signInUrl.searchParams.set("callbackUrl", "/")
@@ -27,6 +27,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api/auth|login|_next/static|_next/image|favicon.ico).*)",
+    "/((?!api|login|_next/static|_next/image|favicon.ico).*)",
   ],
 }
