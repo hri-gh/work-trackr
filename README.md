@@ -1,103 +1,128 @@
-# Work-Trackr
+# Work Trackr
 
-A workforce tracking and payment management system built to simplify manual work record-keeping processes.
+A workforce tracking and payment management system designed to replace manual attendance registers and simplify worker-based financial tracking.
 
-This application focuses on structured business logic, worker management, attendance tracking, and payment summaries.
-
-🔗 **Live Application:** [🔗](https://wrk-trackr.vercel.app/)
-🚀 **Deployed on:** Vercel
+🔗 **Live Demo:** https://demo-work-trackr.netlify.app
 
 ---
 
 ## 🚀 Overview
 
-Work-Trackr was inspired by real-world scenarios where daily worker records and payments were managed manually.
+Work Trackr is built around a real-world use case where daily worker attendance and payments are traditionally managed manually.
 
-The system digitizes:
+This application digitizes the workflow by providing:
 
-- Worker registration
-- Daily attendance tracking
-- Custom wage entries
-- Payment history
-- Paid and unpaid summaries
+- Structured worker management
+- Daily work entry tracking
+- Payment status management
+- Real-time summaries and analytics
 
-The focus of the project is practical business logic rather than just CRUD operations.
+The focus is on **business logic, data integrity, and maintainable architecture**, not just UI.
 
 ---
 
-## 🧠 Core Features
+## ✨ Key Features
 
-- 👤 Worker profile management
-- 📅 Daily work entry with customizable rates
-- 💰 Payment tracking and history
-- 📊 Dashboard summaries (paid vs unpaid)
-- 🗓 Calendar-based worked day visualization
+- 👤 Worker management (add, update, track)
+- 📅 Bulk work entry creation for multiple workers per day
+- 💰 Payment tracking with paid/unpaid status and timestamps
+- 📊 Dashboard summaries (total days, total amount, unpaid balance)
+- 📄 Worker-level analytics with paginated entries
+- 🧾 Audit logging for critical actions (create, update, payment)
 
 ---
 
 ## 🏗 Architecture
 
 ### Frontend
-- Structured dashboard layout
-- Worker and attendance views
-- Calendar-based tracking interface
+- Next.js (App Router)
+- Server Components for data fetching
+- Shadcn UI for consistent design system
+- Responsive dashboard (table + mobile card views)
 
 ### Backend
-- REST APIs for worker and payment management
-- Structured MongoDB data models
-- Server-side validation and logic handling
-
-The application prioritizes clean data relationships between:
-
-- Workers
-- Work entries
-- Payments
+- REST APIs using Next.js Route Handlers
+- Zod for schema validation
+- Service layer for business logic separation
+- Prisma ORM for database interaction
 
 ---
 
-## 📊 Business Logic Focus
+## 🧠 Core Engineering Concepts
 
-This project emphasizes:
-
-- Data modeling for real-world use cases
-- Tracking unpaid balances
-- Handling custom daily rates
-- Generating summary views from raw attendance data
-
-Rather than being a simple task tracker, it simulates a small workforce management system.
-
+- Separation of concerns (API → Service → DB)
+- Server-side data fetching with query-based filtering
+- Bulk operations with transactional consistency
+- Audit logging system with old/new state tracking
+- Pagination and URL-driven state management
 ---
 
-## 🔐 Design Considerations
+## 🗄 Database Design
 
-- Controlled data relationships
-- Clear separation of workers and payment records
-- Server-side handling of business calculations
-- Organized dashboard summaries
+Relational schema designed for clarity and scalability:
+
+- **Worker**
+- **WorkEntry**
+- **AuditLog**
+
+Key considerations:
+- One-to-many relationship (Worker → WorkEntries)
+- Payment tracking per entry
+- Indexed queries for date and worker-based filtering
 
 ---
 
 ## 🛠 Tech Stack
 
-- Next.js
+- Next.js (App Router)
 - TypeScript
 - Node.js
-- MongoDB
-- REST APIs
+- Prisma ORM
+- PostgreSQL (Neon)
+- Zod
+- Tailwind CSS + Shadcn UI
+- Vercel (Deployment)
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](./.github/assets/dashboard/dashboard-dark.png)
+
+### Worker Details
+![Worker Details](./.github/assets/worker-details/worker-details-dark.png)
+
+### Work Entry Form
+![Work Entry Form](./.github/assets/work-entry-form/work-entry-form-dark.png)
+
+---
+
+## 📁 Project Structure (Simplified)
+
+```
+src/
+  app/
+  components/
+  services/
+  lib/
+  utils/
+  hooks/
+```
 
 ---
 
 ## 📌 Purpose
 
-Built as a personal full-stack project to explore:
+This project was built to:
 
-- Business-oriented application design
-- Real-world data modeling
-- Practical financial tracking logic
-- Dashboard-driven UX structure
+- Apply real-world data modeling concepts
+- Design business-focused backend systems
+- Practice clean architecture in a full-stack application
+- Move beyond simple CRUD into meaningful domain logic
 
 ---
 
 ## 🧑‍💻 Author
 
-Developed as a personal engineering project to digitize and simplify manual workforce record management systems.
+Built as a personal full-stack engineering project focused on solving practical workflow problems with clean and maintainable code.
